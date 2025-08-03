@@ -59,6 +59,28 @@ Maak zelf een bestand aan met de naam `wifi_config.h` in de map `/include` van h
 3. **Virtuele Uitgang schakelen:**
    - Gebruik een Virtuele Uitgangsconnector in je Loxone-programma om het commando te sturen.
 
+## OTA (Over-the-Air) Support
+
+Dit project ondersteunt OTA-updates, zodat je het device via WiFi kunt programmeren zonder USB-kabel.
+
+### OTA uploaden via PlatformIO
+
+1. **Zorg dat je ESP32S3 met OTA-code is geprogrammeerd en verbonden met WiFi.**
+2. **Vind het IP-adres van je ESP32S3** (bijvoorbeeld via seriële monitor).
+3. **Pas je `platformio.ini` aan:**
+   ```ini
+   upload_protocol = espota
+   upload_port = <IP-ESP32S3>
+   ```
+   Vervang `<IP-ESP32S3>` door het juiste IP-adres van je device.
+
+4. **Upload via PlatformIO:**
+   - Gebruik de upload-knop in VS Code of het commando:
+     ```
+     pio run --target upload
+     ```
+   - Je ESP32S3 wordt nu via WiFi geprogrammeerd.
+
 ## Opmerking
 
-Iedereen die dit project gebruikt, moet zelf een eigen `wifi_config.h` aanmaken met zijn eigen WiFi-
+Iedereen die dit project gebruikt, moet zelf een eigen `wifi_config.h` aanmaken met zijn eigen WiFi-gegevens.
