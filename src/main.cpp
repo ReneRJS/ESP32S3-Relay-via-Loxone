@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <WiFi.h>
 #include <WebServer.h>
+#include <ArduinoOTA.h> // OTA support
 #include "wifi_config.h" // <-- Voeg dit bestand toe in /include en zet je credentials daarin
 
 // Definieer de pin voor de onboard LED en het relais
@@ -41,6 +42,10 @@ void setup() {
     delay(500);
   }
 
+  // OTA initialisatie
+  ArduinoOTA.setHostname("esp32s3-relay");
+  ArduinoOTA.begin();
+
   httpServer.on("/relay", handleRelay);
   httpServer.begin();
 }
@@ -56,4 +61,7 @@ void loop() {
 
   // HTTP server afhandelen
   httpServer.handleClient();
+
+  // OTA afhandelen
+  ArduinoOTA.handle();
 }
